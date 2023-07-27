@@ -332,6 +332,13 @@ EX_EXPORT_METHOD_AS(getAlbumsAsync,
                                                options:fetchOptions];
       [albums addObjectsFromArray:[EXMediaLibrary _exportCollections:smartAlbumsFetchResult withFetchOptions:fetchOptions inFolder:nil]];
     }
+
+      PHFetchResult<PHAssetCollection *> *sharedAlbumsFetchResult =
+      [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum
+                                               subtype:PHAssetCollectionSubtypeAlbumCloudShared
+                                               options:nil];
+      [albums addObjectsFromArray:[EXMediaLibrary _exportCollections:sharedAlbumsFetchResult withFetchOptions:fetchOptions inFolder:nil]];
+    
     
     resolve(albums);
   }];
